@@ -6,12 +6,14 @@ package gui;
  */
 
 
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -77,7 +79,7 @@ public class View extends JFrame{
 	private JTable amountUpdate;
 	
 	//JButton
-	
+	private JButton apply;
 	
 	
 	
@@ -107,6 +109,7 @@ public class View extends JFrame{
 		amountUpdate 	= new JTable();
 		amountToSave	= new JLabel("Amount to save each pay day in order to reach your target is: ");
 		tfAmountToSave	= new JTextField();
+		apply			= new JButton("Apply");
 		
 		//Add the radio buttons to the group
 		timeFrame.add(weekly);
@@ -147,8 +150,9 @@ public class View extends JFrame{
         mainPanel.add(monthly, 			"cell 0 4");
         mainPanel.add(yearly, 			"cell 0 4, wrap");
         mainPanel.add(amountToSave,		"split 2");
-        mainPanel.add(tfAmountToSave, 	"grow");
-        mainPanel.add(amountTable, "south");
+        mainPanel.add(tfAmountToSave, 	"grow");      
+        mainPanel.add(apply,			"south");        
+        mainPanel.add(amountTable, 		"south");
         
         //Set the group buttons to a default
         weekly.setSelected(true);
@@ -217,6 +221,12 @@ public class View extends JFrame{
 	
 	//Setters//
 	//////////
+	public void setAverageAmount(int average)
+	{
+		tfAmountToSave.setText(String.valueOf(average));
+	}
+	
+	
 
 	//Table manipulation
 	public void setSaveTableData(String[] columnNames, Object[][] data)
@@ -228,11 +238,10 @@ public class View extends JFrame{
 	
 	//ActionListners//
 	/////////////////
-	public void tfBeginAmountActionListner(MouseListener e)
+	public void applyActionListener(ActionListener e)
 	{
-		tfStartAmount.addMouseListener(e);
+		apply.addActionListener(e);
 	}
-	
 	
 	
 	
