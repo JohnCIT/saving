@@ -1,5 +1,7 @@
 package logic;
 
+import gui.View;
+
 import org.joda.time.DateTime;
 
 /**
@@ -10,6 +12,12 @@ import org.joda.time.DateTime;
  */
 
 public class DataForTable {
+	View view;
+	
+	public DataForTable(View view)
+	{
+		this.view = view;
+	}
 
 	//Table stuff
 	/**
@@ -32,9 +40,11 @@ public class DataForTable {
 	 * @param beginDate
 	 * @return
 	 */
-	public static Object[][] dataForTable(int buttonChoice, int expected, int have, DateTime beginDate, DateTime endDate)
+	public Object[][] dataForTable(int expected, int have, DateTime beginDate, DateTime endDate)
 	{
 		int size = 0;
+		int buttonChoice = view.getpaymentTimeChoice();
+		
 		switch(buttonChoice)
 		{
 			case 1:

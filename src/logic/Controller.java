@@ -21,15 +21,23 @@ public class Controller {
 		this.state	= state;
 		
 		//Load the table
-		loadTable();
+		loadFromState();
 	}
 	
 	/**
 	 * Loads the table headings
 	 */
-	private void loadTable()
+	private void loadFromState()
 	{
-		view.setSaveTableData(mod.getSaveTableHeadings(), state.getTableContents());
+		view.setSaveTableData(DataForTable.getSaveTableHeadings(), state.getTableContents());
+	}
+	
+	/**
+	 * saves changes to the state of the program
+	 */
+	private void saveToState()
+	{
+		
 	}
 
 }

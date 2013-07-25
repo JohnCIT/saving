@@ -185,9 +185,24 @@ public class View extends JFrame{
 		return tfGoal.getText();
 	}
 	
-	public ButtonModel getpaymentTimeChoice()
+	public int getpaymentTimeChoice()
 	{
-		return timeFrame.getSelection();
+		if(weekly.isSelected())
+		{
+			return 1;
+		}
+		else if(fortnightly.isSelected())
+		{
+			return 2;
+		}
+		else if(monthly.isSelected())
+		{
+			return 3;
+		}
+		else
+		{
+			return 4;
+		}
 	}
 	
 	
