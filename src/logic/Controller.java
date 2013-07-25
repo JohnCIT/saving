@@ -5,7 +5,15 @@ package logic;
  * version 1
  */
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.math.BigDecimal;
+
 import state.MainState;
+import utill.GeneralUtill;
+import gui.GuiUtill;
 import gui.View;
 
 public class Controller {
@@ -20,8 +28,12 @@ public class Controller {
 		this.view 	= view;
 		this.state	= state;
 		
-		//Load the table
+		//Load all the details from the state
 		loadFromState();
+		
+		
+		//Connect action listeners
+		view.applyActionListener(new applyAction() );
 	}
 	
 	/**
@@ -39,5 +51,40 @@ public class Controller {
 	{
 		
 	}
+	
+	
+	
+	
+	
+	////Action listeners//////
+	/////////////////////////
+	
+	/**
+	 * Action event for the apply button. Get all the data entered
+	 * @author john
+	 *
+	 */
+	class applyAction implements ActionListener{
+
+		public void actionPerformed(ActionEvent e) 
+		{
+			BigDecimal beginAmount;
+			BigDecimal goal;
+			
+			//Check the inputs are big decimal
+			if(! GeneralUtill.stringToBigDecimalCheck(view.getStartingAmount()))
+			{
+				GuiUtill.showError("Incorrect input", "please put in the correct in put in your starting amount");
+			}
+			if(! GeneralUtill.stringToBigDecimalCheck(view.getGoalAmount() ))
+			{
+				GuiUtill.showError("Incorrect input", "please put in the correct in put in your goal amount");
+			}
+			
+			//mod.averageAmountWeekly(GeneralUtill.stringToBigDecimalCheck(check)   getStartingAmount(), view.getGoalAmount());			
+		}
+		
+	}
+	
 
 }
