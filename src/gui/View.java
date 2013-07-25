@@ -9,6 +9,7 @@ package gui;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -45,10 +46,12 @@ public class View extends JFrame{
 	private JLabel startAmount;
 	private JLabel goal;
 	private JLabel payPeriod;
+	private JLabel amountToSave;
 	
 	//TextField
 	private JTextField tfStartAmount;
 	private JTextField tfGoal;
+	private JTextField tfAmountToSave;
 	
 	//Calendar stuff
 	private JDateChooser calBegin;
@@ -97,6 +100,8 @@ public class View extends JFrame{
 		tfStartAmount 	= new JTextField();
 		tfGoal			= new JTextField();
 		amountUpdate 	= new JTable();
+		amountToSave	= new JLabel("Amount to save each pay day in order to reach your target is: ");
+		tfAmountToSave	= new JTextField();
 		
 		//Add the radio buttons to the group
 		timeFrame.add(weekly);
@@ -135,7 +140,9 @@ public class View extends JFrame{
         mainPanel.add(weekly,			"cell 0 4");
         mainPanel.add(fortnightly,		"cell 0 4");
         mainPanel.add(monthly, 			"cell 0 4");
-        mainPanel.add(yearly, 			"cell 0 4");
+        mainPanel.add(yearly, 			"cell 0 4, wrap");
+        mainPanel.add(amountToSave,		"split 2");
+        mainPanel.add(tfAmountToSave, 	"grow");
         mainPanel.add(amountTable, "south");
         
         //Add the charts to the chart panel
@@ -152,15 +159,7 @@ public class View extends JFrame{
 		pack();
 		setLocationRelativeTo(null);//Loads the window in the center		
 	}
-		
-	
-	//Table manipulation
-	public void setSaveTableData(String[] columnNames, Object[][] data)
-	{
-		DefaultTableModel dtm = new DefaultTableModel(data, columnNames);
-		amountUpdate.setModel(dtm);
-	}
-	
+			
 	
 	//Getters//
 	//////////
@@ -175,6 +174,7 @@ public class View extends JFrame{
 		return calEnd.getDate();
 	}
 	
+	//Get the Amounts chosen
 	public String getStartingAmount()
 	{
 		return tfStartAmount.getText();
@@ -185,6 +185,22 @@ public class View extends JFrame{
 		return tfGoal.getText();
 	}
 	
+	public ButtonModel getpaymentTimeChoice()
+	{
+		return timeFrame.getSelection();
+	}
+	
+	
+	
+	//Setters//
+	//////////
+
+	//Table manipulation
+	public void setSaveTableData(String[] columnNames, Object[][] data)
+	{
+		DefaultTableModel dtm = new DefaultTableModel(data, columnNames);
+		amountUpdate.setModel(dtm);
+	}
 	
 	
 	
