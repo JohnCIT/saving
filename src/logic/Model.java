@@ -14,7 +14,7 @@ public class Model {
 	public Model(){}
 	
 		
-	
+	//Table stuff
 	/**
 	 * Headings for the table
 	 * @return The headings for the table
@@ -25,8 +25,14 @@ public class Model {
 		return headings;
 	}
 	
+	
+	
+	
+	
+	
+	//Date stuff
 	/**
-	 * Works out how many weeks between begin date and the end date
+	 * Works out how days between begin date and the end date
 	 * @param beginDate
 	 * @param endDate
 	 * @return
@@ -40,7 +46,19 @@ public class Model {
 			begin.add(Calendar.DAY_OF_MONTH, 1);  
 			daysBetween++;  
 		}  
-		return daysBetween/7;  
+		return daysBetween;  
+	}
+	
+	
+	/**
+	 * Takes in the days and give the weeks
+	 * @param daysBetween
+	 * @return
+	 */
+	public int weeks(long daysBetween)
+	{
+		int weeks = (int) (daysBetween/7);
+		return weeks;
 	}
 
 }
