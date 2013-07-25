@@ -90,8 +90,7 @@ public class MainState {
 	public BigDecimal getStartingAmount() 
 	{
 		return startingAmount;
-	}
-	
+	}	
 	
 	
 	public BigDecimal getGoalAmount() 
