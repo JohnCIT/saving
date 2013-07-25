@@ -14,7 +14,7 @@ public class Main {
 		GuiUtill.setNativeGui();
 		
 		//Get the main state
-		MainState state = loadState();
+		MainState state = Storage.loadState();
 		
 		//Load core program
 		Model mod 		= new Model();
