@@ -5,17 +5,20 @@ package logic;
  * version 1
  */
 
+import state.MainState;
 import gui.View;
 
 public class Controller {
 	
 	Model mod;
 	View view;
+	MainState state;
 	
-	public Controller(Model mod, View view)
+	public Controller(Model mod, View view, MainState state)
 	{
 		this.mod 	= mod;
 		this.view 	= view;
+		this.state	= state;
 		
 		//Load the table
 		loadTable();
@@ -26,7 +29,7 @@ public class Controller {
 	 */
 	private void loadTable()
 	{
-		view.setSaveTableData(mod.getSaveTableHeadings(), null);
+		view.setSaveTableData(mod.getSaveTableHeadings(), state.getTableContents());
 	}
 
 }

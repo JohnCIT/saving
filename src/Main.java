@@ -1,4 +1,5 @@
 
+import state.MainState;
 import gui.GuiUtill;
 import gui.View;
 import logic.Controller;
@@ -12,10 +13,13 @@ public class Main {
 		//Set native style must be called first
 		GuiUtill.setNativeGui();
 		
+		//Get the main state
+		MainState state = loadState();
+		
 		//Load core program
 		Model mod 		= new Model();
 		View view 		= new View();
-		Controller cont = new Controller(mod, view);		
+		Controller cont = new Controller(mod, view, state);		
 	}
 
 }
