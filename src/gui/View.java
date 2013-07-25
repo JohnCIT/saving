@@ -6,6 +6,8 @@ package gui;
  */
 
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.swing.ButtonGroup;
@@ -73,6 +75,9 @@ public class View extends JFrame{
 	
 	//JTable 
 	private JTable amountUpdate;
+	
+	//JButton
+	
 	
 	
 	
@@ -218,6 +223,14 @@ public class View extends JFrame{
 	{
 		DefaultTableModel dtm = new DefaultTableModel(data, columnNames);
 		amountUpdate.setModel(dtm);
+	}
+	
+	
+	//ActionListners//
+	/////////////////
+	public void tfBeginAmountActionListner(MouseListener e)
+	{
+		tfStartAmount.addMouseListener(e);
 	}
 	
 	
