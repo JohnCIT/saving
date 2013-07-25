@@ -16,7 +16,7 @@ public class GeneralUtill {
 	 * @param check String to check
 	 * @return Returns true if the the string is a big decimal
 	 */
-	public boolean stringToBigDecimalCheck(String check)
+	public static boolean stringToBigDecimalCheck(String check)
 	{
 		Scanner input = new Scanner(check);
 		
@@ -26,6 +26,12 @@ public class GeneralUtill {
 		}
 		
 		return false;
+	}
+	
+	
+	public static BigDecimal convertStringToBigDecimal(String amount)
+	{
+		return new BigDecimal(amount);
 	}
 
 }
