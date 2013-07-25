@@ -76,9 +76,14 @@ public class Controller {
 			{
 				GuiUtill.showError("Incorrect input", "please put in the correct in put in your starting amount");
 			}
-			if(! GeneralUtill.stringToBigDecimalCheck(view.getGoalAmount() ))
+			else if(! GeneralUtill.stringToBigDecimalCheck(view.getGoalAmount() ))
 			{
 				GuiUtill.showError("Incorrect input", "please put in the correct in put in your goal amount");
+			}
+			else
+			{
+				beginAmount = GeneralUtill.convertStringToBigDecimal(view.getStartingAmount()); 
+				goal 		= GeneralUtill.convertStringToBigDecimal(view.getGoalAmount());
 			}
 			
 			//mod.averageAmountWeekly(GeneralUtill.stringToBigDecimalCheck(check)   getStartingAmount(), view.getGoalAmount());			
