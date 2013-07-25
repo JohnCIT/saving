@@ -6,6 +6,10 @@ import logic.Controller;
 import logic.DataForTable;
 import logic.Model;
 
+//TODO Save to state. 
+//Load state
+//Save state
+//Load from state.
 
 public class Main {
 	
@@ -18,10 +22,10 @@ public class Main {
 		MainState state = Storage.loadState();
 		
 		//Load core program
-		Model mod 		= new Model();
-		View view 		= new View();
-		Controller cont = new Controller(mod, view, state);	
-		DataForTable tab = new DataForTable(view);
+		Model mod 			= new Model();
+		View view 			= new View();
+		Controller cont 	= new Controller(mod, view, state);	
+		DataForTable tab 	= new DataForTable(view);
 	}
 
 }
