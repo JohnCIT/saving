@@ -6,6 +6,10 @@ import logic.Controller;
 import logic.DataForTable;
 import logic.Model;
 
+//TODO Save to state. 
+//Load state
+//Save state
+//Load from state.
 
 public class Main {
 	
