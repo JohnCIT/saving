@@ -145,6 +145,9 @@ public class View extends JFrame{
         mainPanel.add(tfAmountToSave, 	"grow");
         mainPanel.add(amountTable, "south");
         
+        //Set the group buttons to a default
+        weekly.setSelected(true);
+        
         //Add the charts to the chart panel
         chartHolder.add(chartPanel);
         		
