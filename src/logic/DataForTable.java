@@ -4,6 +4,8 @@ import gui.View;
 
 import org.joda.time.DateTime;
 
+import state.MainState;
+
 /**
  * Gets the data for the table
  * @author john
@@ -13,10 +15,12 @@ import org.joda.time.DateTime;
 
 public class DataForTable {
 	View view;
+	MainState state;
 	
-	public DataForTable(View view)
+	public DataForTable(View view, MainState state)
 	{
 		this.view = view;
+		this.state = state;
 	}
 
 	//Table stuff
