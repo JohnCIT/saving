@@ -217,6 +217,7 @@ public class View extends JFrame{
 		}
 	}
 	
+		
 	
 	
 	//Setters//
