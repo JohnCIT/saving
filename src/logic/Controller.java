@@ -85,14 +85,22 @@ public class Controller {
 			}
 			else
 			{
+				//Get the data to store
 				DateTime beginDate 	= ConvertDateToDateTime.convertDateToDateTime(view.getBeginDate());
-				DateTime endDate	= ConvertDateToDateTime.convertDateToDateTime(view.getEndDate());
-				
+				DateTime endDate	= ConvertDateToDateTime.convertDateToDateTime(view.getEndDate());				
 				beginAmount = GeneralUtill.convertStringToBigDecimal(view.getStartingAmount()); 
 				goal 		= GeneralUtill.convertStringToBigDecimal(view.getGoalAmount());
-			}
-			
-			//mod.averageAmountWeekly(GeneralUtill.stringToBigDecimalCheck(check)   getStartingAmount(), view.getGoalAmount());			
+								
+				//Save the state
+				saveToState();
+				
+				//Get the weeks between the two dates
+				int weeks = mod.getWeeksStarting(beginDate, endDate);
+				
+				//Display the average amount
+				view.setAverageAmount(mod.averageAmountWeekly(weeks,   beginAmount, goal));
+				
+			}			
 		}
 		
 	}
