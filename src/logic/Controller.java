@@ -11,7 +11,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.math.BigDecimal;
 
+import org.joda.time.DateTime;
+
 import state.MainState;
+import utill.ConvertDateToDateTime;
 import utill.GeneralUtill;
 import gui.GuiUtill;
 import gui.View;
@@ -82,6 +85,9 @@ public class Controller {
 			}
 			else
 			{
+				DateTime beginDate 	= ConvertDateToDateTime.convertDateToDateTime(view.getBeginDate());
+				DateTime endDate	= ConvertDateToDateTime.convertDateToDateTime(view.getEndDate());
+				
 				beginAmount = GeneralUtill.convertStringToBigDecimal(view.getStartingAmount()); 
 				goal 		= GeneralUtill.convertStringToBigDecimal(view.getGoalAmount());
 			}
