@@ -222,7 +222,7 @@ public class View extends JFrame{
 	
 	//Setters//
 	//////////
-	public void setAverageAmount(int average)
+	public void setAverageAmount(BigDecimal average)
 	{
 		tfAmountToSave.setText(String.valueOf(average));
 	}
