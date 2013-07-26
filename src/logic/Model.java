@@ -27,7 +27,7 @@ public class Model {
 		long daysBetween = 0;  
 		while (begin.isBefore(endDate)) 
 		{  
-			begin.plusDays(1);  
+			begin = begin.plusDays(1);
 			daysBetween++;  
 		}  
 		return daysBetween;  
@@ -53,11 +53,21 @@ public class Model {
 	 * @param goal
 	 * @return
 	 */
-	public static BigDecimal averageAmountWeekly(int weeks, BigDecimal startingAmount, BigDecimal goal)
+	public BigDecimal averageAmountWeekly(int weeks, BigDecimal startingAmount, BigDecimal goal)
 	{
 		BigDecimal average = goal.subtract(startingAmount);
 		average = average.divide(new BigDecimal(weeks));
 		return average;
+	}
+	
+	/**
+	 *get the weeks between begin date and end date 
+	 */
+	public int getWeeksStarting(DateTime begin, DateTime end)
+	{
+		long days = howManydaysToReachGoalAmount(begin, end);
+		return weeks(days);
+		
 	}
 
 }
