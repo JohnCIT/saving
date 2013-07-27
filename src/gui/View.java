@@ -250,6 +250,16 @@ public class View extends JFrame{
 		apply.addActionListener(e);
 	}
 	
+	public void saveActionListener(ActionListener e)
+	{
+		save.addActionListener(e);
+	}
+	
+	public void loadActionListener(ActionListener e)
+	{
+		load.addActionListener(e);
+	}
+	
 	
 	
 
