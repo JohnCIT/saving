@@ -16,7 +16,7 @@ import org.joda.time.DateTime;
 import Main.Storage;
 
 import state.MainState;
-import utill.ConvertDateToDateTime;
+import utill.DateConversions;
 import utill.GeneralUtill;
 import utill.InputChecker;
 import utill.TableDataConversion;
@@ -51,6 +51,7 @@ public class Controller {
 	private void loadFromState()
 	{
 		view.setSaveTableData(DataForTable.getSaveTableHeadings(), state.getTableContents());
+		view.setData(DateConversions.convertDateTimeToDate(state.getBeginDate()), DateConversions.convertDateTimeToDate(state.getEndDate()), state.getStartingAmount(), state.getGoalAmount());
 	}
 	
 	/**
@@ -86,8 +87,8 @@ public class Controller {
 			BigDecimal goal;
 			
 			//Gets the dates from the GUI
-			DateTime beginDate 	= ConvertDateToDateTime.convertDateToDateTime(view.getBeginDate());
-			DateTime endDate	= ConvertDateToDateTime.convertDateToDateTime(view.getEndDate());	
+			DateTime beginDate 	= DateConversions.convertDateToDateTime(view.getBeginDate());
+			DateTime endDate	= DateConversions.convertDateToDateTime(view.getEndDate());	
 			
 			//Check the inputs are big decimal
 			if(InputChecker.checkInputs(view.getStartingAmount(), view.getGoalAmount(), beginDate, endDate))
@@ -102,11 +103,11 @@ public class Controller {
 				//Display the average amount
 				view.setAverageAmount(mod.averageAmountWeekly(weeks, beginAmount, goal));
 				
-				//Update table
-				view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice()));
-				
 				//Save the state
 				saveToState(beginDate, endDate, beginAmount, goal);
+				
+				//Update table
+				view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice()));
 				
 			}			
 		}
@@ -134,6 +135,7 @@ public class Controller {
 
 		public void actionPerformed(ActionEvent e) {
 			state = Storage.loadState();
+			loadFromState();//Updates the GUI from the newly loaded state
 		}
 		
 	}
