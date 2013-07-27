@@ -65,6 +65,7 @@ public class MainState implements Serializable{
 
 	public void setTableContents(Object[][] tableContents)
 	{
+		this.tableContents = new Object[0][0];
 		this.tableContents = tableContents;
 	}
 	
