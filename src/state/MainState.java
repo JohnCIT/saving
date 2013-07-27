@@ -1,5 +1,6 @@
 package state;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import org.joda.time.DateTime;
@@ -11,7 +12,7 @@ import org.joda.time.DateTime;
  *
  */
 
-public class MainState {
+public class MainState implements Serializable{
 	private DateTime 	beginDate;
 	private DateTime 	endDate;
 	private BigDecimal 	startingAmount;
