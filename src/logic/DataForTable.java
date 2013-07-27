@@ -1,8 +1,14 @@
 package logic;
 
+import java.math.BigDecimal;
+import java.text.Format;
+import java.util.Formatter;
+
 import gui.View;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import state.MainState;
 
@@ -14,14 +20,7 @@ import state.MainState;
  */
 
 public class DataForTable {
-	View view;
-	MainState state;
 	
-	public DataForTable(View view, MainState state)
-	{
-		this.view = view;
-		this.state = state;
-	}
 
 	//Table stuff
 	/**
@@ -44,15 +43,32 @@ public class DataForTable {
 	 * @param beginDate
 	 * @return
 	 */
-	public Object[][] dataForTable(int expected, int have, DateTime beginDate, DateTime endDate)
+	public static Object[][] dataForTable(DateTime beginDate, DateTime endDate, BigDecimal startingAmount, BigDecimal goal, int buttonChoice)
 	{
 		int size = 0;
-		int buttonChoice = view.getpaymentTimeChoice();
+		Object[][] data = null;
+		Model mod = new Model();
 		
 		switch(buttonChoice)
 		{
 			case 1:
-				size = Model.weeks(Model.howManydaysToReachGoalAmount(beginDate, endDate));
+				size 				= Model.weeks(Model.howManydaysToReachGoalAmount(beginDate, endDate));
+				BigDecimal average 	= mod.averageAmountWeekly(size, startingAmount, goal);
+				
+				data = new Object[size][3];
+				
+				for(int row=0; row<size; row++)
+				{
+					DateTimeFormatter fmt = DateTimeFormat.forPattern("d, MMMM, yyyy");
+					String dateFormat = fmt.print(beginDate);
+					
+					data[row][0] = dateFormat; 
+					data[row][1] = startingAmount.add(average);
+					data[row][2] = 0;
+
+					beginDate = beginDate.plusWeeks(1);
+					startingAmount = startingAmount.add(average);
+				}
 				break;
 
 			case 2:
@@ -65,15 +81,7 @@ public class DataForTable {
 				break;
 		}
 
-		Object[][] data = new Object[size][3];
-		for(int row=0; row<size; row++)
-		{
-			data[row][0] = beginDate;
-			data[row][1] = 200;
-			data[row][2] = 0;
-
-			beginDate.plusWeeks(1);
-		}
+		
 
 
 		return data;
