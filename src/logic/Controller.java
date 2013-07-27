@@ -92,6 +92,9 @@ public class Controller {
 				//Display the average amount
 				view.setAverageAmount(mod.averageAmountWeekly(weeks, beginAmount, goal));
 				
+				//Update table
+				view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice()));
+				
 				//Save the state
 				saveToState();
 				
