@@ -17,6 +17,7 @@ import state.MainState;
 import utill.ConvertDateToDateTime;
 import utill.GeneralUtill;
 import utill.InputChecker;
+import utill.TableDataConversion;
 import gui.GuiUtill;
 import gui.View;
 
@@ -51,9 +52,14 @@ public class Controller {
 	/**
 	 * saves changes to the state of the program
 	 */
-	private void saveToState()
+	private void saveToState(DateTime beginDate, DateTime endDate, BigDecimal beginAmount, BigDecimal goal)
 	{
-		
+		state.setBeginDate(beginDate);
+		state.setEndDate(endDate);
+		state.setStartingAmount(beginAmount);
+		state.setGoalAmount(goal);
+		state.setPaymentPeriod(view.getpaymentTimeChoice());
+		state.setTableContents(TableDataConversion.getTableDataAsArray(view.getTableModel()));
 	}
 	
 	
@@ -96,7 +102,7 @@ public class Controller {
 				view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice()));
 				
 				//Save the state
-				saveToState();
+				saveToState(beginDate, endDate, beginAmount, goal);
 				
 			}			
 		}
