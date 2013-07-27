@@ -16,6 +16,7 @@ import org.joda.time.DateTime;
 import state.MainState;
 import utill.ConvertDateToDateTime;
 import utill.GeneralUtill;
+import utill.InputChecker;
 import gui.GuiUtill;
 import gui.View;
 
@@ -74,31 +75,25 @@ public class Controller {
 			BigDecimal beginAmount;
 			BigDecimal goal;
 			
+			//Gets the dates from the GUI
+			DateTime beginDate 	= ConvertDateToDateTime.convertDateToDateTime(view.getBeginDate());
+			DateTime endDate	= ConvertDateToDateTime.convertDateToDateTime(view.getEndDate());	
+			
 			//Check the inputs are big decimal
-			if(! GeneralUtill.stringToBigDecimalCheck(view.getStartingAmount()))
-			{
-				GuiUtill.showError("Incorrect input", "please put in the correct in put in your starting amount");
-			}
-			else if(! GeneralUtill.stringToBigDecimalCheck(view.getGoalAmount() ))
-			{
-				GuiUtill.showError("Incorrect input", "please put in the correct in put in your goal amount");
-			}
-			else
-			{
-				//Get the data to store
-				DateTime beginDate 	= ConvertDateToDateTime.convertDateToDateTime(view.getBeginDate());
-				DateTime endDate	= ConvertDateToDateTime.convertDateToDateTime(view.getEndDate());				
+			if(InputChecker.checkInputs(view.getStartingAmount(), view.getGoalAmount(), beginDate, endDate))
+			{			
+				//Get the data to store			
 				beginAmount = GeneralUtill.convertStringToBigDecimal(view.getStartingAmount()); 
 				goal 		= GeneralUtill.convertStringToBigDecimal(view.getGoalAmount());
-								
-				//Save the state
-				saveToState();
 				
 				//Get the weeks between the two dates
 				int weeks = mod.getWeeksStarting(beginDate, endDate);
 				
 				//Display the average amount
-				view.setAverageAmount(mod.averageAmountWeekly(weeks,   beginAmount, goal));
+				view.setAverageAmount(mod.averageAmountWeekly(weeks, beginAmount, goal));
+				
+				//Save the state
+				saveToState();
 				
 			}			
 		}
