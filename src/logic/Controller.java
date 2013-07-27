@@ -13,6 +13,8 @@ import java.math.BigDecimal;
 
 import org.joda.time.DateTime;
 
+import Main.Storage;
+
 import state.MainState;
 import utill.ConvertDateToDateTime;
 import utill.GeneralUtill;
@@ -39,6 +41,8 @@ public class Controller {
 		
 		//Connect action listeners
 		view.applyActionListener(new applyAction() );
+		view.saveActionListener(new saveAction() );
+		view.loadActionListener(new loadAction() );
 	}
 	
 	/**
@@ -105,6 +109,31 @@ public class Controller {
 				saveToState(beginDate, endDate, beginAmount, goal);
 				
 			}			
+		}
+		
+	}
+	
+	/**
+	 * @author john
+	 * Saves the state of the program
+	 */
+	class saveAction implements ActionListener{
+
+		public void actionPerformed(ActionEvent e) {
+			Storage.saveState(state);
+		}
+		
+	}
+	
+	/**
+	 * Loads the state
+	 * @author john
+	 *
+	 */
+	class loadAction implements ActionListener{
+
+		public void actionPerformed(ActionEvent e) {
+			state = Storage.loadState();
 		}
 		
 	}
