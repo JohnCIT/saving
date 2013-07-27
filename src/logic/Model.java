@@ -1,5 +1,6 @@
 package logic;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.joda.time.DateTime;
 
@@ -56,7 +57,8 @@ public class Model {
 	public BigDecimal averageAmountWeekly(int weeks, BigDecimal startingAmount, BigDecimal goal)
 	{
 		BigDecimal average = goal.subtract(startingAmount);
-		average = average.divide(new BigDecimal(weeks));
+		average.setScale(2);
+		average = average.divide(new BigDecimal(weeks), RoundingMode.HALF_UP);
 		return average;
 	}
 	
