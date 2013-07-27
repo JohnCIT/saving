@@ -25,9 +25,7 @@ public class Main {
 		Model mod 			= new Model();
 		View view 			= new View();
 		Controller cont 	= new Controller(mod, view, state);	
-		DataForTable tab 	= new DataForTable(view, state);
-		
-		
+				
 	}
 
 }
