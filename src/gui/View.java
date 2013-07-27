@@ -233,6 +233,14 @@ public class View extends JFrame{
 		tfAmountToSave.setText(String.valueOf(average));
 	}
 	
+	public void setData(Date beginDate, Date endDate, BigDecimal startAmount, BigDecimal endAmount)
+	{
+		calBegin.setDate(beginDate);
+		calEnd.setDate(endDate);
+		tfStartAmount.setText(String.valueOf(startAmount));
+		tfGoal.setText(String.valueOf(endAmount));
+	}
+	
 	
 
 	//Table manipulation
