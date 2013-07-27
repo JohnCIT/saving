@@ -1,3 +1,4 @@
+package Main;
 
 import state.MainState;
 import gui.GuiUtill;
