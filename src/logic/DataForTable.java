@@ -59,7 +59,7 @@ public class DataForTable {
 				
 				for(int row=0; row<size; row++)
 				{
-					DateTimeFormatter fmt = DateTimeFormat.forPattern("d, MMMM, yyyy");
+					DateTimeFormatter fmt = DateTimeFormat.forPattern("dd, MMMM, yyyy");
 					String dateFormat = fmt.print(beginDate);
 					
 					data[row][0] = dateFormat; 
