@@ -72,6 +72,7 @@ public class View extends JFrame{
 	private JRadioButton fortnightly;
 	private JRadioButton monthly;
 	private JRadioButton yearly;
+	
 	//Group buttons
 	private ButtonGroup timeFrame;
 	
@@ -215,6 +216,11 @@ public class View extends JFrame{
 		{
 			return 4;
 		}
+	}
+	
+	public DefaultTableModel getTableModel()
+	{
+		return (DefaultTableModel) amountUpdate.getModel();
 	}
 	
 		
