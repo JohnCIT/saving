@@ -105,10 +105,10 @@ public class Controller {
 				view.setAverageAmount(mod.averageAmountWeekly(weeks, beginAmount, goal));
 				
 				//Save the state
-				saveToState(beginDate, endDate, beginAmount, goal);
+				saveToState(beginDate, endDate, beginAmount, goal); //Save the state first then reload the table
 				
 				//Update table
-				view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice()));
+				view.setSaveTableData(DataForTable.getSaveTableHeadings(), state.getTableContents());
 				
 			}			
 		}

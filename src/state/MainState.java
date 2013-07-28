@@ -20,7 +20,7 @@ public class MainState implements Serializable{
 	private int 		paymentPeriod;
 	
 	
-	Object[][] tableContents;
+	private Object[][] tableContents;
 	
 	
 	public MainState(){}
@@ -65,7 +65,6 @@ public class MainState implements Serializable{
 
 	public void setTableContents(Object[][] tableContents)
 	{
-		this.tableContents = new Object[0][0];
 		this.tableContents = tableContents;
 	}
 	
@@ -88,12 +87,10 @@ public class MainState implements Serializable{
 		return endDate;
 	}
 	
-	
 	public BigDecimal getStartingAmount() 
 	{
 		return startingAmount;
 	}	
-	
 	
 	public BigDecimal getGoalAmount() 
 	{
