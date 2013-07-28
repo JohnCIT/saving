@@ -42,22 +42,17 @@ public class MainState implements Serializable{
 	{
 		this.beginDate = beginDate;
 	}
-
 	
-
 	public void setEndDate(DateTime endDate) 
 	{
 		this.endDate = endDate;
 	}
-
 	
 	public void setStartingAmount(BigDecimal startingAmount) 
 	{
 		this.startingAmount = startingAmount;
 	}
-
 	
-
 	public void setGoalAmount(BigDecimal goalAmount) 
 	{
 		this.goalAmount = goalAmount;
@@ -67,8 +62,6 @@ public class MainState implements Serializable{
 	{
 		this.tableContents = tableContents;
 	}
-	
-
 
 	public void setPaymentPeriod(int paymentPeriod) 
 	{
