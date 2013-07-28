@@ -31,6 +31,7 @@ public class Storage {
 	      }catch(IOException i)
 	      {
 	         i.printStackTrace();
+	         return state;
 	       
 	      }catch(ClassNotFoundException c)
 	      {

@@ -52,6 +52,7 @@ public class Controller {
 	{
 		view.setSaveTableData(DataForTable.getSaveTableHeadings(), state.getTableContents());
 		view.setData(DateConversions.convertDateTimeToDate(state.getBeginDate()), DateConversions.convertDateTimeToDate(state.getEndDate()), state.getStartingAmount(), state.getGoalAmount());
+		view.setSaveTableData(DataForTable.getSaveTableHeadings(), state.getTableContents());
 	}
 	
 	/**
