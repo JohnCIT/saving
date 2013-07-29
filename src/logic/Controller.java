@@ -128,7 +128,7 @@ public class Controller {
 				saveToState(beginDate, endDate, beginAmount, goal);		
 				
 				//Render the graph
-				CategoryDataset dataset = LineGraph.createDataset(state.getTableContents(), state.userHave);
+				CategoryDataset dataset = LineGraph.createDataset(view.getTableModel(), state.userHave, state.getGoalAmount());
 				JFreeChart chart = LineGraph.createChart(dataset);
 		        view.setChart(chart);
 				
