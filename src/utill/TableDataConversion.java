@@ -6,8 +6,11 @@ package utill;
  */
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
+
+import org.joda.time.DateTime;
 
 import state.MainState;
 
@@ -69,6 +72,60 @@ public class TableDataConversion {
 				
 		return tableData;
 	}
+	
+	
+	/**
+	 * Returns the expected amount as a arrayList
+	 * @param dtm
+	 * @param state
+	 * @return
+	 */
+	public static ArrayList<BigDecimal> getExpectedAmount(DefaultTableModel dtm)
+	{
+		int nRow = dtm.getRowCount(), nCol = dtm.getColumnCount();
+		
+		ArrayList<BigDecimal> expected = new ArrayList<BigDecimal>();
+		
+		for (int i = 0 ; i < nRow ; i++)
+			for (int j = 0 ; j < nCol ; j++)
+			{
+				if(j == 1)
+				{
+					String strval = String.valueOf(dtm.getValueAt(i, j));
+					int val = Integer.parseInt(strval);
+					expected.add(new BigDecimal(val));
+				}
+				
+			}
+				
+		return expected;
+	}
+	
+	
+	public static ArrayList<DateTime> getDates(DefaultTableModel dtm)
+	{
+		int nRow = dtm.getRowCount(), nCol = dtm.getColumnCount();
+		
+		ArrayList<DateTime> dates = new ArrayList<DateTime>();
+		
+		for (int i = 0 ; i < nRow ; i++)
+			for (int j = 0 ; j < nCol ; j++)
+			{
+				if(j == 0)
+				{
+					DateTime date = new DateTime();
+					date = (DateTime) dtm.getValueAt(i, j);
+					dates.add(date);
+				}
+				
+			}
+				
+		return dates;
+	}
+	
+	
+	
+	
 	
 
 }
