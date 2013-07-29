@@ -117,7 +117,7 @@ public class Controller {
 				
 				//Update table
 				if(!state.getDoesTheUserHaveMoney()){
-					view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice(), state.userHave) );
+					view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice(), state.userHave) ); //Need to check somethnig so the table resets
 				}
 				else{
 					view.setSaveTableData(DataForTable.getSaveTableHeadings(), state.getTableContents());

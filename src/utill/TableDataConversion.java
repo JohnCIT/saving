@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import state.MainState;
 
@@ -113,9 +115,10 @@ public class TableDataConversion {
 			{
 				if(j == 0)
 				{
-					DateTime date = new DateTime();
-					date = (DateTime) dtm.getValueAt(i, j);
-					dates.add(date);
+					
+					DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MMMM/yyyy");
+					DateTime dt = formatter.parseDateTime((String) dtm.getValueAt(i, j));
+					dates.add(dt);
 				}
 				
 			}

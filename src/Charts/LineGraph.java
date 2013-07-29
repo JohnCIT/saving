@@ -106,8 +106,8 @@ public class LineGraph extends ApplicationFrame {
     public static CategoryDataset createDataset(DefaultTableModel dtm, ArrayList<BigDecimal> have, BigDecimal goal) {
         
         //Get the data out of the table model
-    	ArrayList<DateTime> dates = TableDataConversion.getDates(dtm);
-    	ArrayList<BigDecimal> expected = new ArrayList<BigDecimal>();
+    	ArrayList<DateTime> dates 		= TableDataConversion.getDates(dtm);
+    	ArrayList<BigDecimal> expected 	= TableDataConversion.getExpectedAmount(dtm);
     	
     	//Make the dataset
     	final DefaultCategoryDataset dataset = new DefaultCategoryDataset();

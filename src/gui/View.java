@@ -249,7 +249,7 @@ public class View extends JFrame{
 	
 	public void setChart(JFreeChart chart)
 	{
-		chartPanel = new ChartPanel(chart);
+		chartPanel.setChart(chart);
 	}
 	
 	
