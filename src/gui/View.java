@@ -125,7 +125,7 @@ public class View extends JFrame{
 		
 		
 		//Chart demo
-		CategoryDataset dataset = LineGraph.createDataset();
+		CategoryDataset dataset = LineGraph.createSampleDataset();
 		JFreeChart chart = LineGraph.createChart(dataset);
         chartPanel = new ChartPanel(chart);
                 
