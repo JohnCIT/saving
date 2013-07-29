@@ -25,6 +25,7 @@ public class MainState implements Serializable{
 	
 	
 	private Object[][] tableContents;
+	public ArrayList<BigDecimal> userHave = new ArrayList<BigDecimal>();
 	
 	
 	public MainState(){}
@@ -84,7 +85,6 @@ public class MainState implements Serializable{
 			for (int j=0; j<tableContents[i].length; j++)
 			{
 				this.tableContents[i][j] = tableContents[i][j];
-				System.out.println(this.tableContents[i][j]);
 			}
 		}
 		

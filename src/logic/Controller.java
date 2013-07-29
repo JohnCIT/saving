@@ -108,11 +108,11 @@ public class Controller {
 				view.setAverageAmount(mod.averageAmountWeekly(weeks, beginAmount, goal));
 				
 				//Save the table to state
-				state.setTableContents(TableDataConversion.getTableDataAsArray(view.getTableModel()));
+				state.setTableContents(TableDataConversion.getTableDataAsArrayandSaveToHave(view.getTableModel(), state) );
 				
 				//Update table
 				if(!state.getDoesTheUserHaveMoney()){
-					view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice()));
+					view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice(), state.userHave) );
 				}
 				else{
 					view.setSaveTableData(DataForTable.getSaveTableHeadings(), state.getTableContents());
@@ -163,7 +163,7 @@ public class Controller {
 
 
 		public void focusLost(FocusEvent e) {
-			state.setTableContents(TableDataConversion.getTableDataAsArray(view.getTableModel()));
+			state.setTableContents(TableDataConversion.getTableDataAsArrayandSaveToHave(view.getTableModel(), state) );
 			state.setDoesTheUserHaveMoney(true);
 			System.out.println("here");
 		}

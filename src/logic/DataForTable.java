@@ -2,6 +2,7 @@ package logic;
 
 import java.math.BigDecimal;
 import java.text.Format;
+import java.util.ArrayList;
 import java.util.Formatter;
 
 import gui.View;
@@ -43,11 +44,12 @@ public class DataForTable {
 	 * @param beginDate
 	 * @return
 	 */
-	public static Object[][] dataForTable(DateTime beginDate, DateTime endDate, BigDecimal startingAmount, BigDecimal goal, int buttonChoice)
+	public static Object[][] dataForTable(DateTime beginDate, DateTime endDate, BigDecimal startingAmount, BigDecimal goal, int buttonChoice, ArrayList<BigDecimal> have)
 	{
 		int size = 0;
 		Object[][] data = null;
 		Model mod = new Model();
+		
 		
 		switch(buttonChoice)
 		{
@@ -63,8 +65,14 @@ public class DataForTable {
 					String dateFormat = fmt.print(beginDate);
 					
 					data[row][0] = dateFormat; 
-					data[row][1] = startingAmount.add(average);
-					data[row][2] = 0;
+					data[row][1] = startingAmount.add(average);					
+					if(have.size() == 0){
+						data[row][2] = 0;
+					}
+					else{
+						data[row][2] = have.get(row);
+					}
+									
 
 					beginDate = beginDate.plusWeeks(1);
 					startingAmount = startingAmount.add(average);
