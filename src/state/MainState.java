@@ -13,11 +13,12 @@ import org.joda.time.DateTime;
  */
 
 public class MainState implements Serializable{
-	private DateTime 	beginDate;
-	private DateTime 	endDate;
-	private BigDecimal 	startingAmount;
-	private BigDecimal	goalAmount;
-	private int 		paymentPeriod;
+	private DateTime 	beginDate 		= new DateTime();
+	private DateTime 	endDate			= new DateTime();
+	private BigDecimal 	startingAmount 	= new BigDecimal(0);
+	private BigDecimal	goalAmount		= new BigDecimal(0);
+	private int 		paymentPeriod = 0;
+	private boolean		doesTheUserHaveMoney = false;
 	
 	
 	private Object[][] tableContents;
@@ -67,6 +68,10 @@ public class MainState implements Serializable{
 	{
 		this.paymentPeriod = paymentPeriod;
 	}
+	
+	public void setDoesTheUserHaveMoney(boolean doesTheUserHaveMoney) {
+		this.doesTheUserHaveMoney = doesTheUserHaveMoney;
+	}
 
 	
 	//Getters
@@ -98,6 +103,10 @@ public class MainState implements Serializable{
 	public int getPaymentPeriod() 
 	{
 		return paymentPeriod;
+	}
+
+	public boolean getDoesTheUserHaveMoney() {
+		return doesTheUserHaveMoney;
 	}
 
 	
