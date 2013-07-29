@@ -35,6 +35,7 @@ import org.jfree.data.category.CategoryDataset;
 import com.sun.xml.internal.messaging.saaj.util.CharReader;
 import com.toedter.calendar.JDateChooser;
 import Charts.BarChartDemo1;
+import Charts.LineGraph;
 import net.miginfocom.swing.MigLayout;
 
 public class View extends JFrame{
@@ -83,6 +84,9 @@ public class View extends JFrame{
 	//JButton
 	private JButton apply;
 	
+	//ChartPanel
+	private ChartPanel chartPanel;
+	
 	
 	
 	public View()
@@ -121,9 +125,9 @@ public class View extends JFrame{
 		
 		
 		//Chart demo
-		CategoryDataset dataset = BarChartDemo1.createDataset();
-		JFreeChart chart = BarChartDemo1.createChart(dataset);
-        ChartPanel chartPanel = new ChartPanel(chart);
+		CategoryDataset dataset = LineGraph.createDataset();
+		JFreeChart chart = LineGraph.createChart(dataset);
+        chartPanel = new ChartPanel(chart);
                 
         //Set the main layout
       	setLayout(new MigLayout());
@@ -188,6 +192,7 @@ public class View extends JFrame{
 		return calEnd.getDate();
 	}
 	
+	
 	//Get the Amounts chosen
 	public String getStartingAmount()
 	{
@@ -240,6 +245,11 @@ public class View extends JFrame{
 		calEnd.setDate(endDate);
 		tfStartAmount.setText(String.valueOf(startAmount));
 		tfGoal.setText(String.valueOf(endAmount));
+	}
+	
+	public void setChart(JFreeChart chart)
+	{
+		chartPanel = new ChartPanel(chart);
 	}
 	
 	

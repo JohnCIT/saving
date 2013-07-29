@@ -13,8 +13,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.math.BigDecimal;
 
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.general.Dataset;
 import org.joda.time.DateTime;
 
+import Charts.LineGraph;
 import Main.Storage;
 
 import state.MainState;
@@ -120,7 +125,13 @@ public class Controller {
 				
 				
 				//Save the state
-				saveToState(beginDate, endDate, beginAmount, goal);			
+				saveToState(beginDate, endDate, beginAmount, goal);		
+				
+				//Render the graph
+				CategoryDataset dataset = LineGraph.createDataset(state.getTableContents(), state.userHave);
+				JFreeChart chart = LineGraph.createChart(dataset);
+		        view.setChart(chart);
+				
 			}			
 		}
 		
@@ -165,7 +176,6 @@ public class Controller {
 		public void focusLost(FocusEvent e) {
 			state.setTableContents(TableDataConversion.getTableDataAsArrayandSaveToHave(view.getTableModel(), state) );
 			state.setDoesTheUserHaveMoney(true);
-			System.out.println("here");
 		}
 		
 	}
