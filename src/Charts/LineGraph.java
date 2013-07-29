@@ -24,6 +24,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.joda.time.DateTime;
 
+import utill.TableDataConversion;
+
 public class LineGraph extends ApplicationFrame {
 
     /**
@@ -33,7 +35,7 @@ public class LineGraph extends ApplicationFrame {
      */
     public LineGraph(final String title) {
         super(title);
-        final CategoryDataset dataset = createDataset();
+        final CategoryDataset dataset = createSampleDataset();
         final JFreeChart chart = createChart(dataset);
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(500, 270));
@@ -45,7 +47,7 @@ public class LineGraph extends ApplicationFrame {
      * 
      * @return The dataset.
      */
-   public static CategoryDataset createDataset() {
+   public static CategoryDataset createSampleDataset() {
             	
     	// row keys...
         final String series1 = "Expected";
@@ -101,57 +103,28 @@ public class LineGraph extends ApplicationFrame {
      * 
      * @return The dataset.
      */
-    public static CategoryDataset createDataset(DefaultTableModel dtm, ArrayList have) {
+    public static CategoryDataset createDataset(DefaultTableModel dtm, ArrayList<BigDecimal> have, BigDecimal goal) {
         
         //Get the data out of the table model
-    	ArrayList<DateTime> dates = new ArrayList<DateTime>();
+    	ArrayList<DateTime> dates = TableDataConversion.getDates(dtm);
     	ArrayList<BigDecimal> expected = new ArrayList<BigDecimal>();
     	
-    	// row keys...
+    	//Make the dataset
+    	final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    	
+    	//Row keys
         final String series1 = "Expected";
         final String series2 = "Have";
         final String series3 = "Goal";
-
-        // column keys...
-        final String type1 = "Type 1";
-        final String type2 = "Type 2";
-        final String type3 = "Type 3";
-        final String type4 = "Type 4";
-        final String type5 = "Type 5";
-        final String type6 = "Type 6";
-        final String type7 = "Type 7";
-        final String type8 = "Type 8";
-
-        // create the dataset...
-        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-        dataset.addValue(1.0, series1, type1);
-        dataset.addValue(4.0, series1, type2);
-        dataset.addValue(3.0, series1, type3);
-        dataset.addValue(5.0, series1, type4);
-        dataset.addValue(5.0, series1, type5);
-        dataset.addValue(7.0, series1, type6);
-        dataset.addValue(7.0, series1, type7);
-        dataset.addValue(8.0, series1, type8);
-
-        dataset.addValue(5.0, series2, type1);
-        dataset.addValue(7.0, series2, type2);
-        dataset.addValue(6.0, series2, type3);
-        dataset.addValue(8.0, series2, type4);
-        dataset.addValue(4.0, series2, type5);
-        dataset.addValue(4.0, series2, type6);
-        dataset.addValue(2.0, series2, type7);
-        dataset.addValue(1.0, series2, type8);
-
-        dataset.addValue(4.0, series3, type1);
-        dataset.addValue(3.0, series3, type2);
-        dataset.addValue(2.0, series3, type3);
-        dataset.addValue(3.0, series3, type4);
-        dataset.addValue(6.0, series3, type5);
-        dataset.addValue(3.0, series3, type6);
-        dataset.addValue(4.0, series3, type7);
-        dataset.addValue(3.0, series3, type8);
-
+    	
+    	//Add to the dataset
+    	for(int i=0; i<dates.size(); i++)
+    	{
+    		dataset.addValue(expected.get(i), series1, dates.get(i));
+    		dataset.addValue(have.get(i), series2, dates.get(i));
+    		dataset.addValue(goal, series3, dates.get(i));
+    	}
+    	
         return dataset;
                 
     }
@@ -178,10 +151,10 @@ public class LineGraph extends ApplicationFrame {
         );
 
         // NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
-//        final StandardLegend legend = (StandardLegend) chart.getLegend();
-  //      legend.setDisplaySeriesShapes(true);
-    //    legend.setShapeScaleX(1.5);
-      //  legend.setShapeScaleY(1.5);
+        //final StandardLegend legend = (StandardLegend) chart.getLegend();
+        //legend.setDisplaySeriesShapes(true);
+        //legend.setShapeScaleX(1.5);
+        //legend.setShapeScaleY(1.5);
         //legend.setDisplaySeriesLines(true);
 
         chart.setBackgroundPaint(Color.white);
