@@ -7,6 +7,7 @@ package gui;
 
 
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.math.BigDecimal;
@@ -223,7 +224,7 @@ public class View extends JFrame{
 		return (DefaultTableModel) amountUpdate.getModel();
 	}
 	
-		
+			
 	
 	
 	//Setters//
@@ -266,6 +267,11 @@ public class View extends JFrame{
 	public void loadActionListener(ActionListener e)
 	{
 		load.addActionListener(e);
+	}
+	
+	public void saveTableActionListener(FocusListener e)
+	{
+		amountUpdate.addFocusListener(e);
 	}
 	
 	

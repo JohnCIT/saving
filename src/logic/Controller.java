@@ -7,6 +7,8 @@ package logic;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.math.BigDecimal;
@@ -42,7 +44,8 @@ public class Controller {
 		//Connect action listeners
 		view.applyActionListener(new applyAction() );
 		view.saveActionListener(new saveAction() );
-		view.loadActionListener(new loadAction() );
+		view.loadActionListener(new LoadAction() );
+		view.saveTableActionListener(new SaveTableListener());
 	}
 	
 	/**
@@ -104,8 +107,17 @@ public class Controller {
 				//Display the average amount
 				view.setAverageAmount(mod.averageAmountWeekly(weeks, beginAmount, goal));
 				
+				//Save the table to state
+				state.setTableContents(TableDataConversion.getTableDataAsArray(view.getTableModel()));
+				
 				//Update table
-				view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice()));
+				if(!state.getDoesTheUserHaveMoney()){
+					view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice()));
+				}
+				else{
+					view.setSaveTableData(DataForTable.getSaveTableHeadings(), state.getTableContents());
+				}
+				
 				
 				//Save the state
 				saveToState(beginDate, endDate, beginAmount, goal);			
@@ -131,11 +143,29 @@ public class Controller {
 	 * @author john
 	 *
 	 */
-	class loadAction implements ActionListener{
+	class LoadAction implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
 			state = Storage.loadState();
 			loadFromState();//Updates the GUI from the newly loaded state
+		}
+		
+	}
+	
+	
+	/**
+	 * @author john
+	 * Focus listener for the JTable
+	 */
+	class SaveTableListener implements FocusListener{
+
+		public void focusGained(FocusEvent e) {}
+
+
+		public void focusLost(FocusEvent e) {
+			state.setTableContents(TableDataConversion.getTableDataAsArray(view.getTableModel()));
+			state.setDoesTheUserHaveMoney(true);
+			System.out.println("here");
 		}
 		
 	}

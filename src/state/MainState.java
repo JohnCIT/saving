@@ -2,6 +2,7 @@ package state;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import org.joda.time.DateTime;
 
@@ -19,6 +20,8 @@ public class MainState implements Serializable{
 	private BigDecimal	goalAmount		= new BigDecimal(0);
 	private int 		paymentPeriod = 0;
 	private boolean		doesTheUserHaveMoney = false;
+	
+	ArrayList<BigDecimal> have = new ArrayList<BigDecimal>();
 	
 	
 	private Object[][] tableContents;
@@ -61,7 +64,30 @@ public class MainState implements Serializable{
 
 	public void setTableContents(Object[][] tableContents)
 	{
-		this.tableContents = tableContents;
+		int outer = 0;
+		int inner = 0;
+		//Get how big each section of the array is
+		for(int i=0; i<tableContents.length; i++)
+		{
+			outer ++;
+			for (int j=0; j<tableContents[i].length; j++)
+			{
+				inner ++;
+			}
+		}
+		
+		//Make a new array and copy the data to the new one
+		this.tableContents = new Object[outer][inner];
+		
+		for(int i=0; i<tableContents.length; i++)
+		{
+			for (int j=0; j<tableContents[i].length; j++)
+			{
+				this.tableContents[i][j] = tableContents[i][j];
+				System.out.println(this.tableContents[i][j]);
+			}
+		}
+		
 	}
 
 	public void setPaymentPeriod(int paymentPeriod) 
