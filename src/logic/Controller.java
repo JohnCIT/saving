@@ -85,10 +85,12 @@ public class Controller {
 	private boolean isDatesDifferent(DateTime begin, DateTime end)
 	{
 		if(begin.isEqual(state.getBeginDate())|| end.isEqual(state.getEndDate())){
-			state.userHave = new ArrayList<BigDecimal>();
 			return true;
 		}
 		else{
+			for(int i=0; i<state.userHave.size(); i++){//Reset the array
+				state.userHave.set(i, new BigDecimal(0));
+			}
 			return false;
 		}
 	}
