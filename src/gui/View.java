@@ -164,6 +164,9 @@ public class View extends JFrame{
 		//Add the panels to the main panel
 		add(mainPanel);
 		add(chartPanel);
+		
+		//Load the icons
+		setIconImages(IconLoader.getIcons());
 				
 		//Frame stuff
 		setTitle("Budget");

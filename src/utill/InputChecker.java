@@ -35,6 +35,7 @@ public class InputChecker {
 		
 		if(beginDate.plusWeeks(1).isAfter(endDate)){
 			GuiUtill.showError("More than week", "Ensure the begin date and end date are duther apart than one week");
+			valid = false;
 		}
 			
 		return valid;
