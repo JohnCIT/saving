@@ -160,7 +160,7 @@ public class View extends JFrame{
         
         //Set the group buttons to a default
         weekly.setSelected(true);
-                		
+                        		
 		//Add the panels to the main panel
 		add(mainPanel);
 		add(chartPanel);

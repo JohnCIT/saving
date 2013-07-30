@@ -62,7 +62,10 @@ public class Controller {
 		view.setSaveTableData(DataForTable.getSaveTableHeadings(), state.getTableContents());
 		view.setData(DateConversions.convertDateTimeToDate(state.getBeginDate()), DateConversions.convertDateTimeToDate(state.getEndDate()), state.getStartingAmount(), state.getGoalAmount());
 		view.setSaveTableData(DataForTable.getSaveTableHeadings(), state.getTableContents());
-		drawGraph();
+		if(state.getDoesTheUserHaveMoney()){
+			drawGraph();
+		}
+		
 	}
 	
 	/**
@@ -84,12 +87,14 @@ public class Controller {
 	 */
 	private boolean isDatesDifferent(DateTime begin, DateTime end)
 	{
-		if(begin.isEqual(state.getBeginDate())|| end.isEqual(state.getEndDate())){
+		if(begin.isEqual(state.getBeginDate()) || end.isEqual(state.getEndDate())){
 			return true;
 		}
-		else{
-			for(int i=0; i<state.userHave.size(); i++){//Reset the array
-				state.userHave.set(i, new BigDecimal(0));
+		else
+			{
+				state.userHave = new ArrayList<BigDecimal>();
+				for(int i=0; i<view.getTableModel().getRowCount(); i++){//Reset the array
+				state.userHave.add(new BigDecimal(0));
 			}
 			return false;
 		}
@@ -140,21 +145,22 @@ public class Controller {
 				
 				//Display the average amount
 				view.setAverageAmount(mod.averageAmountWeekly(weeks, beginAmount, goal));
-				
-				//Save the table to state
-				state.setTableContents(TableDataConversion.getTableDataAsArrayandSaveToHave(view.getTableModel(), state) );
-								
+																
 				//Update table
 				if(!state.getDoesTheUserHaveMoney() || isDatesDifferent(beginDate, endDate)){
-					view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice(), state.userHave) ); //Need to check something so the table resets
+					view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice(), state.userHave) );
+					state.setTableContents(TableDataConversion.getTableDataAsArray(view.getTableModel()));
 				}
 				else{
 					view.setSaveTableData(DataForTable.getSaveTableHeadings(), state.getTableContents());
+					//Save the table to state
+					state.setTableContents(TableDataConversion.getTableDataAsArrayandSaveToHave(view.getTableModel(), state) );
 				}
 				
 				
 				//Save the state
 				saveToState(beginDate, endDate, beginAmount, goal);		
+				
 				
 				//Render the graph
 				drawGraph();
