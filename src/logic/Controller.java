@@ -12,6 +12,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -61,6 +62,7 @@ public class Controller {
 		view.setSaveTableData(DataForTable.getSaveTableHeadings(), state.getTableContents());
 		view.setData(DateConversions.convertDateTimeToDate(state.getBeginDate()), DateConversions.convertDateTimeToDate(state.getEndDate()), state.getStartingAmount(), state.getGoalAmount());
 		view.setSaveTableData(DataForTable.getSaveTableHeadings(), state.getTableContents());
+		drawGraph();
 	}
 	
 	/**
@@ -74,6 +76,31 @@ public class Controller {
 		state.setGoalAmount(goal);
 		state.setPaymentPeriod(view.getpaymentTimeChoice());
 		state.setTableContents(TableDataConversion.getTableDataAsArray(view.getTableModel()));
+	}
+	
+	/**
+	 * Checks if the dates are different than what is stored and if it is resets the array
+	 * @return
+	 */
+	private boolean isDatesDifferent(DateTime begin, DateTime end)
+	{
+		if(begin.isEqual(state.getBeginDate())|| end.isEqual(state.getEndDate())){
+			state.userHave = new ArrayList<BigDecimal>();
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	/**
+	 * Draw the graph
+	 */
+	private void drawGraph()
+	{
+		CategoryDataset dataset = LineGraph.createDataset(view.getTableModel(), state.userHave, state.getGoalAmount());
+		JFreeChart chart = LineGraph.createChart(dataset);
+        view.setChart(chart);
 	}
 	
 	
@@ -114,10 +141,10 @@ public class Controller {
 				
 				//Save the table to state
 				state.setTableContents(TableDataConversion.getTableDataAsArrayandSaveToHave(view.getTableModel(), state) );
-				
+								
 				//Update table
-				if(!state.getDoesTheUserHaveMoney()){
-					view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice(), state.userHave) ); //Need to check somethnig so the table resets
+				if(!state.getDoesTheUserHaveMoney() || isDatesDifferent(beginDate, endDate)){
+					view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice(), state.userHave) ); //Need to check something so the table resets
 				}
 				else{
 					view.setSaveTableData(DataForTable.getSaveTableHeadings(), state.getTableContents());
@@ -128,9 +155,7 @@ public class Controller {
 				saveToState(beginDate, endDate, beginAmount, goal);		
 				
 				//Render the graph
-				CategoryDataset dataset = LineGraph.createDataset(view.getTableModel(), state.userHave, state.getGoalAmount());
-				JFreeChart chart = LineGraph.createChart(dataset);
-		        view.setChart(chart);
+				drawGraph();
 				
 			}			
 		}
