@@ -44,7 +44,6 @@ public class View extends JFrame{
 	
 	//Panels
 	private JPanel mainPanel;
-	private JPanel chartHolder;
 	
 	//Labels
 	private JLabel beginDate;
@@ -93,7 +92,6 @@ public class View extends JFrame{
 	{		
 		//Create the the components
 		mainPanel 	= new JPanel(new MigLayout());
-		chartHolder = new JPanel();
 		beginDate	= new JLabel("Begin date:");
 		endDate		= new JLabel("End date:");
 		calBegin	= new JDateChooser();
@@ -162,13 +160,10 @@ public class View extends JFrame{
         
         //Set the group buttons to a default
         weekly.setSelected(true);
-        
-        //Add the charts to the chart panel
-        chartHolder.add(chartPanel);
-        		
+                		
 		//Add the panels to the main panel
 		add(mainPanel);
-		add(chartHolder);
+		add(chartPanel);
 				
 		//Frame stuff
 		setTitle("Budget");
