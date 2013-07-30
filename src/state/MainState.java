@@ -20,10 +20,7 @@ public class MainState implements Serializable{
 	private BigDecimal	goalAmount		= new BigDecimal(0);
 	private int 		paymentPeriod = 0;
 	private boolean		doesTheUserHaveMoney = false;
-	
-	ArrayList<BigDecimal> have = new ArrayList<BigDecimal>();
-	
-	
+		
 	private Object[][] tableContents;
 	public ArrayList<BigDecimal> userHave = new ArrayList<BigDecimal>();
 	
