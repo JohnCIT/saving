@@ -162,10 +162,11 @@ public class Controller {
 				//Update table
 				if(!state.getDoesTheUserHaveMoney() || isDatesDifferent(beginDate, endDate)){
 					view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice(), state.userHave) );
-					state.setTableContents(TableDataConversion.getTableDataAsArray(view.getTableModel()));
+					//Save the table to state
+					state.setTableContents(TableDataConversion.getTableDataAsArrayandSaveToHave(view.getTableModel(), state) );
 				}
 				else{
-					view.setSaveTableData(DataForTable.getSaveTableHeadings(), state.getTableContents());
+					view.setSaveTableData(DataForTable.getSaveTableHeadings(), DataForTable.dataForTable(beginDate, endDate, beginAmount, goal, view.getpaymentTimeChoice(), state.userHave) );
 					//Save the table to state
 					state.setTableContents(TableDataConversion.getTableDataAsArrayandSaveToHave(view.getTableModel(), state) );
 				}
