@@ -23,6 +23,8 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import utill.TableDataConversion;
 
@@ -112,6 +114,9 @@ public class LineGraph extends ApplicationFrame {
     	//Make the dataset
     	final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
     	
+    	//Set the print format
+    	DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/YY");
+    	
     	//Row keys
         final String series1 = "Expected";
         final String series2 = "Have";
@@ -120,9 +125,9 @@ public class LineGraph extends ApplicationFrame {
     	//Add to the dataset
     	for(int i=0; i<dates.size(); i++)
     	{
-    		dataset.addValue(expected.get(i), series1, dates.get(i));
-    		dataset.addValue(have.get(i), series2, dates.get(i));
-    		dataset.addValue(goal, series3, dates.get(i));
+    		dataset.addValue(expected.get(i), series1, dates.get(i).toString(formatter));
+    		dataset.addValue(have.get(i), series2, dates.get(i).toString(formatter));
+    		dataset.addValue(goal, series3, dates.get(i).toString(formatter));
     	}
     	
         return dataset;
