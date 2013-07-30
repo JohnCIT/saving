@@ -2,6 +2,7 @@ package utill;
 
 import gui.GuiUtill;
 
+import org.jfree.data.time.Week;
 import org.joda.time.DateTime;
 
 /**
@@ -31,6 +32,11 @@ public class InputChecker {
 			GuiUtill.showError("Incorrect date input", "Your end date is before the start date. This is not allowed");
 			valid = false;
 		}
+		
+		if(beginDate.plusWeeks(1).isAfter(endDate)){
+			GuiUtill.showError("More than week", "Ensure the begin date and end date are duther apart than one week");
+		}
+			
 		return valid;
 	}
 
