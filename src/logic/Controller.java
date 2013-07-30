@@ -19,6 +19,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.Dataset;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeComparator;
 
 import Charts.LineGraph;
 import Main.Storage;
@@ -87,18 +88,30 @@ public class Controller {
 	 */
 	private boolean isDatesDifferent(DateTime begin, DateTime end)
 	{
-		if(begin.isEqual(state.getBeginDate()) || end.isEqual(state.getEndDate())){
+		if(isBeginDateDiff(begin) == 0 && isEndDateDiff(end) == 0){
 			return true;
 		}
 		else
 			{
 				state.userHave = new ArrayList<BigDecimal>();
-				for(int i=0; i<view.getTableModel().getRowCount(); i++){//Reset the array
+				for(int i=0; i<mod.getWeeksStarting(begin, end); i++){//Reset the array
 				state.userHave.add(new BigDecimal(0));
 			}
 			return false;
 		}
 	}
+	
+	//Check firstDate
+	private int isBeginDateDiff(DateTime begin)
+	{
+		return begin.compareTo(state.getBeginDate());
+	}
+	//Check second date
+	private int isEndDateDiff(DateTime end)
+	{
+		return end.compareTo(state.getEndDate());
+	}
+	
 	
 	/**
 	 * Draw the graph
